@@ -58,20 +58,20 @@ function game() {               //main game function
                     }
                 
                     if (i<5) {
-                        console.log(result);
-                        console.log("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
+                        alert(result);
+                        alert("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
                     }
                     else if (i==5 && (computerScore>userScore)) {
-                        console.log(result);
-                        console.log("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nBetter luck next time!");
+                        alert(result);
+                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nBetter luck next time!");
                     }
                     else if (i==5 && (computerScore<userScore)) {
-                        console.log(result);
-                        console.log("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nCongratulations! Well played!");
+                        alert(result);
+                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nCongratulations! Well played!");
                     }
                     else if (i==5 && (computerScore=userScore)) {
-                        console.log(result);
-                        console.log("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nNeck in neck!What a game!");
+                        alert(result);
+                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nNeck in neck!What a game!");
                     }
             }
 
@@ -82,6 +82,13 @@ function game() {               //main game function
               }
         } 
         
+    }
+    let replayPrompt = prompt("Type yes if you would like to play another game");
+    if (replayPrompt.toLowerCase() === "yes") {
+        game();
+    }
+    else {
+        alert("Until next time!");
     }
 }
 
