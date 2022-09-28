@@ -1,11 +1,11 @@
-function computerChoice () {
+function computerChoice () {  //generate computer answer from array
     arr = ["rock", "paper", "scissors"];
     let randomIndex = Math.floor(Math.random() * arr.length);
     let randomItem = arr[randomIndex];
     return randomItem;
 }
 
-function playRound (computerSelection, playerSelection) {
+function playRound (computerSelection, playerSelection) {  //function to run a single round of game
     if (playerSelection.toLowerCase() == computerSelection) {
         let gameResult = "It's a stalemate! You both drew " + playerSelection;
         return gameResult;
@@ -20,21 +20,53 @@ function playRound (computerSelection, playerSelection) {
     }
 }
 
-function game() {
+function validateInput (userInput) {  //function to validate correct input
+    if ((userInput.toLowerCase() !== "rock") && (userInput.toLowerCase() !== "paper") && (userInput.toLowerCase() !== "scissors"))
+    {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+let computerScore = 0
+let userScore = 0
+
+function game() {               //main game function
     alert("Welcome to Rock, Paper and Scissors. This game will take your through 5 rounds of the game. Each round you will be asked to enter Rock, Paper or Scissors. See if you can beat the computer! Good luck!");
+
     for(let i=1; i<6; i++) {
-        try {    
-            let userSelection = prompt("Round " + i + " please enter rock, paper or scissors!").toLowerCase;
-            while ((userSelection !== "rock") && (userSelection !== "paper") && (userSelection !== "scissors")) 
-            {
-                userSelection = prompt("Wrong input. Please only enter: rock, paper or scissors");
+        try {               //try catch to capture Cancel button
+            let userSelection = prompt("Round " + i + " please enter rock, paper or scissors!");
+            
+            if (validateInput(userSelection) == false) {        //if function for the first validation
+                while ((userSelection !== "rock") && (userSelection !== "paper") && (userSelection !== "scissors"))     //Bug here! if first input is incorrect the while loop will break
+                {
+                    userSelection = prompt("Incorrect input, please ONLY enter rock, paper or scissors!");
+
+                }
             }
+            else {
+
+                let result = (playRound(computerChoice(), userSelection));
+                if (result.slice(0,5) == "You l") {
+                    computerScore ++;  
+                }
+                else  if (result.slice(0,5) == "You w") {
+                    userScore ++;      
+                }
+                console.log(result);
+                console.log("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
+            }
+
         } catch (e) {
             if (e instanceof TypeError) {
                 alert("Thanks for playing!!");
                 break
               }
-        }    
+        } 
+        
     }
 }
 
