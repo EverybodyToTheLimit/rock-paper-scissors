@@ -39,15 +39,12 @@ function game() {               //main game function
     for(let i=1; i<6; i++) {
         try {               //try catch to capture Cancel button
             let userSelection = prompt("Round " + i + " please enter rock, paper or scissors!");
-            
-            if (validateInput(userSelection) == false) {        //if function for the first validation
-                while ((userSelection !== "rock") && (userSelection !== "paper") && (userSelection !== "scissors"))     //Bug here! if first input is incorrect the while loop will break
-                {
-                    userSelection = prompt("Incorrect input, please ONLY enter rock, paper or scissors!");
-
-                }
+            while (validateInput(userSelection) == false)  {
+                alert("Incorrect input, please ONLY enter rock, paper or scissors!");
+                i --;
+                break;
             }
-            else {
+            
 
                 let result = (playRound(computerChoice(), userSelection));
                 if (result.slice(0,5) == "You l") {
@@ -58,7 +55,7 @@ function game() {               //main game function
                 }
                 console.log(result);
                 console.log("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
-            }
+
 
         } catch (e) {
             if (e instanceof TypeError) {
