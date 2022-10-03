@@ -1,0 +1,42 @@
+button {
+    display: flex;
+    flex: 1,auto;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+}
+
+.header {
+    display: flex;
+    justify-content:center;
+    background-color: rgb(173, 106, 106);
+    width: 100%;
+}
+
+.selections {
+    display: flex;
+    justify-content: space-between;
+    margin: 5% 10% 5% 10%;
+}
+
+body {
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(230, 221, 221);
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+img {
+    object-fit:scale-down;    
+    height: 70%;
+    width: 70%;
+}
