@@ -11,11 +11,11 @@ function playRound (computerSelection, playerSelection) {  //function to run a s
         return gameResult;
     }
     else if ((playerSelection.toLowerCase() == "rock" && computerSelection == "paper") || ((playerSelection.toLowerCase() == "paper" && computerSelection == "scissors")) || (playerSelection.toLowerCase() == "scissors" && computerSelection == "rock")) {
-        let gameResult = "You loose! " + computerSelection + " beats " + playerSelection;
+        let gameResult = "You loose! " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + " beats " + playerSelection;
         return gameResult;
     }
     else {
-        let gameResult = "You win! " + playerSelection + " beats " + computerSelection;
+        let gameResult = "You win! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection;
         return gameResult;
     }
 }
@@ -44,41 +44,129 @@ function gameImproved() {           //main game function
     const responseP = document.getElementById('response-label-player');
     const responseC = document.getElementById('response-label-computer');
     const selections = document.getElementById('selections');
-
+    const footer = document.getElementById('footer');
+    let computerScore = 0
+    let userScore = 0
 
         if (rockBttn.addEventListener('click', () => {
             paperBttn.classList.add("fade-out");
             scissorsBttn.classList.add("fade-out");
             paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
-            scissorsBttn.addEventListener('animationend', () => scissorsBttn.style.display="none");
-            let userSelection = "rock"
-            let computerSelection = computerChoice();
-            const computerDiv = document.createElement('div');
-            let computerDivImage = document.createElement('button');
-            computerDivImage.innerHTML = '<image src="./img/scissors.png"/>';
-            responseP.textContent = "You chose\r\nrock";
-            responseC.textContent = "Computer chose\r\n" + computerSelection;
-            selections.appendChild(computerDiv);
-            computerDiv.appendChild(computerDivImage);
+            scissorsBttn.addEventListener('animationend', () => {
+                scissorsBttn.style.display="none";
+                let userSelection = "rock"
+                responseP.textContent = "You chose\r\nrock";
+                responseC.textContent = "Computer chose\r\n..."
+                const computerDiv = document.createElement('div');
+                selections.appendChild(computerDiv);
+                let computerSelection = computerChoice();
+                let computerDivImage = document.createElement('button');
+                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+                computerDiv.appendChild(computerDivImage);
+                computerDivImage.classList.add("fade-in");
+                computerDivImage.addEventListener('animationend', () => {
+                    responseC.textContent = "Computer chose\r\n" + computerSelection
+                    let result = (playRound(computerSelection, userSelection));
+                    if (result.slice(0,5) == "You l") {
+                            footer.textContent = result;
+                            computerDivImage.style.border = "20px solid green"
+                            rockBttn.style.border = "20px solid red"
+                            userScore ++;
+                        }
+                    else  if (result.slice(0,5) == "You w") {
+                        footer.textContent = result;
+                        rockBttn.style.border = "20px solid green"
+                        computerDivImage.style.border = "20px solid red"
+                        computerScore ++;
+                        }
+                    else {
+                        footer.textContent = result; 
+                    }
+            });
+                });
+        
 
-        }));
+
+
+        })) {}
+
         else if (paperBttn.addEventListener('click', () => {
-            fade(rockBttn); 
-            fade(scissorsBttn);
-            let userSelection = "paper"
-            const responseP = document.createElement('div');
-            responseP.textContent = "You have chosen paper";
-            response.appendChild(responseP);
-        }));
+            rockBttn.classList.add("fade-out");
+            scissors.classList.add("fade-out");
+            rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
+            scissorsBttn.addEventListener('animationend', () => {
+                scissorsBttn.style.display="none";
+                let userSelection = "paper"
+                responseP.textContent = "You chose\r\npaper";
+                responseC.textContent = "Computer chose\r\n..."
+                const computerDiv = document.createElement('div');
+                selections.appendChild(computerDiv);
+                let computerSelection = computerChoice();
+                let computerDivImage = document.createElement('button');
+                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+                computerDiv.appendChild(computerDivImage);
+                computerDivImage.classList.add("fade-in");
+                computerDivImage.addEventListener('animationend', () => {
+                    responseC.textContent = "Computer chose\r\n" + computerSelection
+                    let result = (playRound(computerSelection, userSelection));
+                    if (result.slice(0,5) == "You l") {
+                            footer.textContent = result;
+                            computerDivImage.style.border = "20px solid green"
+                            paperBttn.style.border = "20px solid red"
+                            userScore ++;
+                        }
+                    else  if (result.slice(0,5) == "You w") {
+                        footer.textContent = result;
+                        paperBttn.style.border = "20px solid green"
+                        computerDivImage.style.border = "20px solid red"
+                        computerScore ++;
+                        }
+                    else {
+                        footer.textContent = result; 
+                    }
+            });
+                });
+        
+        })) {}
+ 
         else if (scissorsBttn.addEventListener('click', () => {
-            fade(paperBttn); 
-            fade(rockBttn);
-            let userSelection = "scissors"
-            const responseP = document.createElement('div');
-            responseP.textContent = "You have chosen scissors";
-            response.appendChild(responseP);
-        }));
-
+            rockBttn.classList.add("fade-out");
+            paperBttn.classList.add("fade-out");
+            rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
+            paperBttn.addEventListener('animationend', () => {
+                paperBttn.style.display="none";
+                let userSelection = "scissors"
+                responseP.textContent = "You chose\r\nscissors";
+                responseC.textContent = "Computer chose\r\n..."
+                const computerDiv = document.createElement('div');
+                selections.appendChild(computerDiv);
+                let computerSelection = computerChoice();
+                let computerDivImage = document.createElement('button');
+                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+                computerDiv.appendChild(computerDivImage);
+                computerDivImage.classList.add("fade-in");
+                computerDivImage.addEventListener('animationend', () => {
+                    responseC.textContent = "Computer chose\r\n" + computerSelection
+                    let result = (playRound(computerSelection, userSelection));
+                    if (result.slice(0,5) == "You l") {
+                            footer.textContent = result;
+                            computerDivImage.style.border = "20px solid green"
+                            scissorsBttn.style.border = "20px solid red"
+                            userScore ++;
+                        }
+                    else  if (result.slice(0,5) == "You w") {
+                        footer.textContent = result;
+                        scissorsBttn.style.border = "20px solid green"
+                        computerDivImage.style.border = "20px solid red"
+                        computerScore ++;
+                        }
+                    else {
+                        footer.textContent = result; 
+                    }
+            });
+                });
+        
+        })) {}
 };
 
 // old code - may be re-factored
