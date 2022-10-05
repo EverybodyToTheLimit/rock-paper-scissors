@@ -116,9 +116,57 @@ function gameImproved() {           //main game function
         computerDivImage.classList.add("fade-in");
         computerDivImage.addEventListener('animationend', () => {responseC.textContent = "Computer chose\r\n" + computerSelection;
         setTimeout(function() {        
-        document.getElementById('next-round').style.display="flex";
+        let nextRound = document.getElementById('next-round');
+        nextRound.style.display="flex";
         footer.textContent = result;},2000)
-        if (itirations == 5) {alert("finish game")}
+        if (itirations == 1) {nextRound.textContent = "THE LAST ROUND"}
+        else if(itirations > 1) {
+            nextRoundClick();
+            document.getElementById('selections').style.display = "none"
+            const tempText = document.getElementById('temp-text');
+            tempText.style.display="flex";
+            const welcomeText = document.getElementById('welcome-text').style.display="flex";
+            welcomeText.textContent = "Hope you enjoyed the game\r\nTo play again, click the button below"
+            goButton.style.display = "none";
+            let endButton = document.createElement('button');
+            endButton.textContent = "Try Again"
+            endButton.addEventListener('click', () => {
+                location.reload()});
+                // computerScore = 0;
+                // userScore = 0;
+                // itirations = 0;
+                // responseP.textContent = "";
+                // responseC.textContent = "";
+                // paperBttn.classList.remove("fade-out");
+                // scissorsBttn.classList.remove("fade-out");
+                // rockBttn.classList.remove("fade-out");
+                // paperBttn.style.display="flex"
+                // scissorsBttn.style.display="flex"
+                // rockBttn.style.display="flex"
+                // userSelection = "";
+                // // const computerDiv = document.getElementById('resultImage');
+                // // selections.removeChild(computerDiv);
+                // document.getElementById('next-round').style.display="none";
+                // rockBttn.style.border = "";
+                // footer.textContent = "";
+                // document.getElementById('selections').style.display="flex";
+                // document.getElementById('temp-text').style.display="none";
+                // endButton.style.display="none";
+                // gameImproved()});
+
+            tempText.appendChild(endButton);
+            const goText = document.getElementById('welcome-text');
+            goText.textContent = "";
+            if (computerScore > userScore) {
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>YOU ARE A LOOOOOOOOOOOSER!!! :)";
+            }
+            else if (computerScore < userScore) {
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>YOU ARE THE WINNER!!! :)";
+            }
+            else if (computerScore = userScore) {
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>Neck in neck! Try again!";
+            }
+        }
 
     });
 
