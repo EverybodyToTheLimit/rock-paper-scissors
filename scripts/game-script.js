@@ -52,205 +52,285 @@ function gameImproved() {           //main game function
     const playerScoreLabel = document.getElementById('player-score');
     const computerScoreLabel = document.getElementById('computer-score');
     const nextRound = document.getElementById('next-round');
-    let computerScore = 0
-    let userScore = 0
+    let computerScore = 0;
+    let userScore = 0;
+    let itirations = 0;
 
-        if (rockBttn.addEventListener('click', () => {
-            paperBttn.classList.add("fade-out");
-            scissorsBttn.classList.add("fade-out");
-            paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
-            scissorsBttn.addEventListener('animationend', () => {
-                scissorsBttn.style.display="none";
-                let userSelection = "rock"
-                responseP.textContent = "You chose\r\nrock";
-                responseC.textContent = "Computer chose\r\n..."
-                const computerDiv = document.createElement('div');
-                selections.appendChild(computerDiv);
-                let computerSelection = computerChoice();
-                let computerDivImage = document.createElement('button');
-                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
-                computerDiv.appendChild(computerDivImage);
-                computerDivImage.classList.add("fade-in");
-                computerDivImage.addEventListener('animationend', () => {
-                    responseC.textContent = "Computer chose\r\n" + computerSelection
-                    let result = (playRound(computerSelection, userSelection));
-                    if (result.slice(0,5) == "You l") {
-                            footer.textContent = result;
-                            computerDivImage.style.border = "20px solid rgba(0,128,0,0.5)"
-                            rockBttn.style.border = "20px solid rgba(255,0,0,0.5)"
-                            computerScore ++;
-                        }
-                    else  if (result.slice(0,5) == "You w") {
-                        footer.textContent = result;
-                        rockBttn.style.border = "20px solid rgba(0,128,0,0.5)"
-                        computerDivImage.style.border = "20px solid rgba(255,0,0,0.5)"
-                        userScore ++;
-                        }
-                    else {
-                        footer.textContent = result; 
-                    }
-
-                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
-                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
-                    document.getElementById('next-round').style.display="flex";
-                    nextRound.addEventListener('click', () => {
-
-                        
-                    })
-
-                    
-            }); 
-                }); 
+    rockBttn.addEventListener('click', () => {rockIsClicked(); setTimeout(function() {computerBits("rock")},3000);});
+    paperBttn.addEventListener('click', () => {paperIsClicked(); setTimeout(function() {computerBits("paper")},3000);});
+    scissorsBttn.addEventListener('click', () => {scissorsIsClicked(); setTimeout(function() {computerBits("scissors")},3000);});
+    nextRound.addEventListener('click', () => nextRoundClick());
 
 
-        })) {
-             
-        }
-
-        else if (paperBttn.addEventListener('click', () => {
-            rockBttn.classList.add("fade-out");
-            scissors.classList.add("fade-out");
-            rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
-            scissorsBttn.addEventListener('animationend', () => {
-                scissorsBttn.style.display="none";
-                let userSelection = "paper"
-                responseP.textContent = "You chose\r\npaper";
-                responseC.textContent = "Computer chose\r\n..."
-                const computerDiv = document.createElement('div');
-                selections.appendChild(computerDiv);
-                let computerSelection = computerChoice();
-                let computerDivImage = document.createElement('button');
-                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
-                computerDiv.appendChild(computerDivImage);
-                computerDivImage.classList.add("fade-in");
-                computerDivImage.addEventListener('animationend', () => {
-                    responseC.textContent = "Computer chose\r\n" + computerSelection
-                    let result = (playRound(computerSelection, userSelection));
-                    if (result.slice(0,5) == "You l") {
-                            footer.textContent = result;
-                            computerDivImage.style.border = "20px solid green"
-                            paperBttn.style.border = "20px solid red"
-                            computerScore ++;
-                        }
-                    else  if (result.slice(0,5) == "You w") {
-                        footer.textContent = result;
-                        paperBttn.style.border = "20px solid green"
-                        computerDivImage.style.border = "20px solid red"
-                        userScore ++;
-                        }
-                    else {
-                        footer.textContent = result; 
-                    }
-                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
-                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
-            });
-                });
-        
-        })) {}
- 
-        else if (scissorsBttn.addEventListener('click', () => {
-            rockBttn.classList.add("fade-out");
-            paperBttn.classList.add("fade-out");
-            rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
-            paperBttn.addEventListener('animationend', () => {
-                paperBttn.style.display="none";
-                let userSelection = "scissors"
-                responseP.textContent = "You chose\r\nscissors";
-                responseC.textContent = "Computer chose\r\n..."
-                const computerDiv = document.createElement('div');
-                selections.appendChild(computerDiv);
-                let computerSelection = computerChoice();
-                let computerDivImage = document.createElement('button');
-                computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
-                computerDiv.appendChild(computerDivImage);
-                computerDivImage.classList.add("fade-in");
-                computerDivImage.addEventListener('animationend', () => {
-                    responseC.textContent = "Computer chose\r\n" + computerSelection
-                    let result = (playRound(computerSelection, userSelection));
-                    if (result.slice(0,5) == "You l") {
-                            footer.textContent = result;
-                            computerDivImage.style.border = "20px solid green"
-                            scissorsBttn.style.border = "20px solid red"
-                            computerScore ++;
-                        }
-                    else  if (result.slice(0,5) == "You w") {
-                        footer.textContent = result;
-                        scissorsBttn.style.border = "20px solid green"
-                        computerDivImage.style.border = "20px solid red"
-                        userScore ++;
-                        }
-                    else {
-                        footer.textContent = result; 
-                    }
-                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
-                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
-            });
-                });
-        
-        })) {}
-};
+    function nextRoundClick() {
+        responseP.textContent = "";
+        responseC.textContent = "";
+        paperBttn.classList.remove("fade-out");
+        scissorsBttn.classList.remove("fade-out");
+        rockBttn.classList.remove("fade-out");
+        paperBttn.style.display="flex"
+        scissorsBttn.style.display="flex"
+        rockBttn.style.display="flex"
+        userSelection = "";
+        const computerDiv = document.getElementById('resultImage');
+        // computerDiv.removeChild(computerDivImage);
+        selections.removeChild(computerDiv);
+        document.getElementById('next-round').style.display="none";
+        rockBttn.style.border = "";
+        footer.textContent = "";
 
 
-// old code - may be re-factored
-let computerScore = 0
-let userScore = 0
+    }
 
-function game() {               //main game function
-    alert("Welcome to Rock, Paper and Scissors. This game will take your through 5 rounds of the game. Each round you will be asked to enter Rock, Paper or Scissors. See if you can beat the computer! Good luck!");
+    function rockIsClicked() {
+        paperBttn.classList.add("fade-out");
+        scissorsBttn.classList.add("fade-out");
+        paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
+        scissorsBttn.addEventListener('animationend', () => {scissorsBttn.style.display="none";});
+    }
 
-    for(let i=1; i<6; i++) {
-        try {               //try catch to capture Cancel button
-            let userSelection = prompt("Round " + i + " please enter rock, paper or scissors!");
-            
-            if (validateInput(userSelection) == false) {
-                while (validateInput(userSelection) == false)  {
-                    alert("Incorrect input, please ONLY enter rock, paper or scissors!");
-                    i --;
-                    break;
-                }
-            }
-            else {
+    function paperIsClicked() {
+        rockBttn.classList.add("fade-out");
+        scissorsBttn.classList.add("fade-out");
+        rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
+        scissorsBttn.addEventListener('animationend', () => {scissorsBttn.style.display="none";});
+    }
 
-                let result = (playRound(computerChoice(), userSelection));
-                    if (result.slice(0,5) == "You l") {
-                        computerScore ++;  
-                    }
-                    else  if (result.slice(0,5) == "You w") {
-                        userScore ++;      
-                    }
+    function scissorsIsClicked() {
+        paperBttn.classList.add("fade-out");
+        rockBttn.classList.add("fade-out");
+        paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
+        rockBttn.addEventListener('animationend', () => {rockBttn.style.display="none";});
+    }
+
+
+    function computerBits(userSelection) {
+        responseP.textContent = "You chose\r\n" + userSelection;
+        responseC.textContent = "Computer chose\r\n..."
+        const computerDiv = document.createElement('div');
+        computerDiv.setAttribute("id", "resultImage")
+        selections.appendChild(computerDiv);
+        let computerSelection = computerChoice();
+        let computerDivImage = document.createElement('button');
+        computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+        computerDivImage.classList.add("fade-in");
+        computerDivImage.addEventListener('animationend', () => {responseC.textContent = "Computer chose\r\n" + computerSelection;
+        setTimeout(function() {        
+        document.getElementById('next-round').style.display="flex";
+        footer.textContent = result;},2000)
+        if (itirations == 5) {alert("finish game")}
+
+    });
+
+
+        let result = (playRound(computerSelection, userSelection));
+        if (result.slice(0,5) == "You l") {
                 
-                    if (i<5) {
-                        alert(result);
-                        alert("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
-                    }
-                    else if (i==5 && (computerScore>userScore)) {
-                        alert(result);
-                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nBetter luck next time!");
-                    }
-                    else if (i==5 && (computerScore<userScore)) {
-                        alert(result);
-                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nCongratulations! Well played!");
-                    }
-                    else if (i==5 && (computerScore=userScore)) {
-                        alert(result);
-                        alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nNeck in neck!What a game!");
-                    }
+                computerScore ++;
+                itirations ++;
             }
-
-        } catch (e) {
-            if (e instanceof TypeError) {
-                alert("Thanks for playing!!");
-                break
-              }
-        } 
+        else  if (result.slice(0,5) == "You w") {
+         
+            userScore ++;
+            itirations ++;
+            }
+        else {
+            itirations ++;
+        }
         
-    }
-    let replayPrompt = prompt("Type yes if you would like to play another game");
-    if (replayPrompt.toLowerCase() === "yes") {
-        game();
-    }
-    else {
-        alert("Until next time!");
+        computerDiv.appendChild(computerDivImage);
+        playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+        computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
+        return(result);
     }
 }
+        // rockBttn.addEventListener('click', () => {
+        //     paperBttn.classList.add("fade-out");
+        //     scissorsBttn.classList.add("fade-out");
+        //     paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
+        //     scissorsBttn.addEventListener('animationend', () => {
+        //         scissorsBttn.style.display="none";
+        //         let userSelection = "rock"
+        //         responseP.textContent = "You chose\r\nrock";
+        //         responseC.textContent = "Computer chose\r\n..."
+        //         const computerDiv = document.createElement('div');
+        //         selections.appendChild(computerDiv);
+        //         let computerSelection = computerChoice();
+        //         let computerDivImage = document.createElement('button');
+        //         computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+        //         computerDiv.appendChild(computerDivImage);
+        //         computerDivImage.classList.add("fade-in");
+        //         computerDivImage.addEventListener('animationend', () => {
+        //             responseC.textContent = "Computer chose\r\n" + computerSelection
+        //             let result = (playRound(computerSelection, userSelection));
+        //             if (result.slice(0,5) == "You l") {
+        //                     footer.textContent = result;
+        //                     computerDivImage.style.border = "20px solid rgba(0,128,0,0.5)"
+        //                     rockBttn.style.border = "20px solid rgba(255,0,0,0.5)"
+        //                     computerScore ++;
+        //                 }
+        //             else  if (result.slice(0,5) == "You w") {
+        //                 footer.textContent = result;
+        //                 rockBttn.style.border = "20px solid rgba(0,128,0,0.5)"
+        //                 computerDivImage.style.border = "20px solid rgba(255,0,0,0.5)"
+        //                 userScore ++;
+        //                 }
+        //             else {
+        //                 footer.textContent = result; 
+        //             }
+
+        //             playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+        //             computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
+        //             document.getElementById('next-round').style.display="flex";
+
+                    
+        //     }); 
+        //         }); 
+
+        // })
+//         paperBttn.addEventListener('click', () => {
+//             rockBttn.classList.add("fade-out");
+//             scissors.classList.add("fade-out");
+//             rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
+//             scissorsBttn.addEventListener('animationend', () => {
+//                 scissorsBttn.style.display="none";
+//                 let userSelection = "paper"
+//                 responseP.textContent = "You chose\r\npaper";
+//                 responseC.textContent = "Computer chose\r\n..."
+//                 const computerDiv = document.createElement('div');
+//                 selections.appendChild(computerDiv);
+//                 let computerSelection = computerChoice();
+//                 let computerDivImage = document.createElement('button');
+//                 computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+//                 computerDiv.appendChild(computerDivImage);
+//                 computerDivImage.classList.add("fade-in");
+//                 computerDivImage.addEventListener('animationend', () => {
+//                     responseC.textContent = "Computer chose\r\n" + computerSelection
+//                     let result = (playRound(computerSelection, userSelection));
+//                     if (result.slice(0,5) == "You l") {
+//                             footer.textContent = result;
+//                             computerDivImage.style.border = "20px solid green"
+//                             paperBttn.style.border = "20px solid red"
+//                             computerScore ++;
+//                         }
+//                     else  if (result.slice(0,5) == "You w") {
+//                         footer.textContent = result;
+//                         paperBttn.style.border = "20px solid green"
+//                         computerDivImage.style.border = "20px solid red"
+//                         userScore ++;
+//                         }
+//                     else {
+//                         footer.textContent = result; 
+//                     }
+//                     playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+//                     computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
+//             });
+//                 });
+        
+//         })
+ 
+//         scissorsBttn.addEventListener('click', () => {
+//             rockBttn.classList.add("fade-out");
+//             paperBttn.classList.add("fade-out");
+//             rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
+//             paperBttn.addEventListener('animationend', () => {
+//                 paperBttn.style.display="none";
+//                 let userSelection = "scissors"
+//                 responseP.textContent = "You chose\r\nscissors";
+//                 responseC.textContent = "Computer chose\r\n..."
+//                 const computerDiv = document.createElement('div');
+//                 selections.appendChild(computerDiv);
+//                 let computerSelection = computerChoice();
+//                 let computerDivImage = document.createElement('button');
+//                 computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+//                 computerDiv.appendChild(computerDivImage);
+//                 computerDivImage.classList.add("fade-in");
+//                 computerDivImage.addEventListener('animationend', () => {
+//                     responseC.textContent = "Computer chose\r\n" + computerSelection
+//                     let result = (playRound(computerSelection, userSelection));
+//                     if (result.slice(0,5) == "You l") {
+//                             footer.textContent = result;
+//                             computerDivImage.style.border = "20px solid green"
+//                             scissorsBttn.style.border = "20px solid red"
+//                             computerScore ++;
+//                         }
+//                     else  if (result.slice(0,5) == "You w") {
+//                         footer.textContent = result;
+//                         scissorsBttn.style.border = "20px solid green"
+//                         computerDivImage.style.border = "20px solid red"
+//                         userScore ++;
+//                         }
+//                     else {
+//                         footer.textContent = result; 
+//                     }
+//                     playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+//                     computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
+//             });
+//                 });
+        
+//         })
+//     }
+
+// // old code - may be re-factored
+// // let computerScore = 0
+// // let userScore = 0
+
+// function game() {               //main game function
+//     alert("Welcome to Rock, Paper and Scissors. This game will take your through 5 rounds of the game. Each round you will be asked to enter Rock, Paper or Scissors. See if you can beat the computer! Good luck!");
+
+//     for(let i=1; i<6; i++) {
+//         try {               //try catch to capture Cancel button
+//             let userSelection = prompt("Round " + i + " please enter rock, paper or scissors!");
+            
+//             if (validateInput(userSelection) == false) {
+//                 while (validateInput(userSelection) == false)  {
+//                     alert("Incorrect input, please ONLY enter rock, paper or scissors!");
+//                     i --;
+//                     break;
+//                 }
+//             }
+//             else {
+
+//                 let result = (playRound(computerChoice(), userSelection));
+//                     if (result.slice(0,5) == "You l") {
+//                         computerScore ++;  
+//                     }
+//                     else  if (result.slice(0,5) == "You w") {
+//                         userScore ++;      
+//                     }
+                
+//                     if (i<5) {
+//                         alert(result);
+//                         alert("The score is \nComputer: " + computerScore + "\nUser: " + userScore);
+//                     }
+//                     else if (i==5 && (computerScore>userScore)) {
+//                         alert(result);
+//                         alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nBetter luck next time!");
+//                     }
+//                     else if (i==5 && (computerScore<userScore)) {
+//                         alert(result);
+//                         alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nCongratulations! Well played!");
+//                     }
+//                     else if (i==5 && (computerScore=userScore)) {
+//                         alert(result);
+//                         alert("The final score is ***DRUMROLL*** \nComputer: " + computerScore + "\nUser: " + userScore +"\nNeck in neck!What a game!");
+//                     }
+//             }
+
+//         } catch (e) {
+//             if (e instanceof TypeError) {
+//                 alert("Thanks for playing!!");
+//                 break
+//               }
+//         } 
+        
+//     }
+//     let replayPrompt = prompt("Type yes if you would like to play another game");
+//     if (replayPrompt.toLowerCase() === "yes") {
+//         game();
+//     }
+//     else {
+//         alert("Until next time!");
+//     }
+// }
 
