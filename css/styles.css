@@ -112,15 +112,26 @@ button {
     
 }
 
+#next-round {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(163, 99, 99);
+    width: 100px;
+    height: 100px;
+    font-weight: bolder;
+}
+
 .header {
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
+    align-items: center;
     background-color: rgb(173, 106, 106);
     color: rgb(48, 15, 15);
     font-size: x-large;
     width: 100%;
-    padding: 2%;
-    padding: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 #temp-text {
@@ -176,6 +187,8 @@ body {
     background-color: rgb(230, 221, 221);
     margin-left: 0px;
     margin-right: 0px;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 img {
@@ -198,7 +211,7 @@ img {
     align-items: center;
     justify-content: space-evenly;
     padding-top: 0;
-    font-size: 60px;
+    font-size:xx-large;
     color: rgb(18, 37, 54);
     width: 100%;
     margin: 5% auto 5% auto;
@@ -207,5 +220,7 @@ img {
 
 #response-label-computer, #response-label-player {
     text-align:center;
+    text-shadow: 5px;
     white-space: pre;
+    width: 20%;
 }

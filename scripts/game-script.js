@@ -35,8 +35,12 @@ goButton.addEventListener('click', function(){ gameImproved() });
 
 
 function gameImproved() {           //main game function
+
+
+
     document.getElementById('selections').style.display="flex";
     document.getElementById('temp-text').style.display="none";
+    document.getElementById('next-round').style.display="none";
 
     const rockBttn = document.getElementById('rock');
     const paperBttn = document.getElementById('paper');
@@ -45,6 +49,9 @@ function gameImproved() {           //main game function
     const responseC = document.getElementById('response-label-computer');
     const selections = document.getElementById('selections');
     const footer = document.getElementById('footer');
+    const playerScoreLabel = document.getElementById('player-score');
+    const computerScoreLabel = document.getElementById('computer-score');
+    const nextRound = document.getElementById('next-round');
     let computerScore = 0
     let userScore = 0
 
@@ -69,26 +76,36 @@ function gameImproved() {           //main game function
                     let result = (playRound(computerSelection, userSelection));
                     if (result.slice(0,5) == "You l") {
                             footer.textContent = result;
-                            computerDivImage.style.border = "20px solid green"
-                            rockBttn.style.border = "20px solid red"
-                            userScore ++;
+                            computerDivImage.style.border = "20px solid rgba(0,128,0,0.5)"
+                            rockBttn.style.border = "20px solid rgba(255,0,0,0.5)"
+                            computerScore ++;
                         }
                     else  if (result.slice(0,5) == "You w") {
                         footer.textContent = result;
-                        rockBttn.style.border = "20px solid green"
-                        computerDivImage.style.border = "20px solid red"
-                        computerScore ++;
+                        rockBttn.style.border = "20px solid rgba(0,128,0,0.5)"
+                        computerDivImage.style.border = "20px solid rgba(255,0,0,0.5)"
+                        userScore ++;
                         }
                     else {
                         footer.textContent = result; 
                     }
-            });
-                });
-        
+
+                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
+                    document.getElementById('next-round').style.display="flex";
+                    nextRound.addEventListener('click', () => {
+
+                        
+                    })
+
+                    
+            }); 
+                }); 
 
 
-
-        })) {}
+        })) {
+             
+        }
 
         else if (paperBttn.addEventListener('click', () => {
             rockBttn.classList.add("fade-out");
@@ -113,17 +130,19 @@ function gameImproved() {           //main game function
                             footer.textContent = result;
                             computerDivImage.style.border = "20px solid green"
                             paperBttn.style.border = "20px solid red"
-                            userScore ++;
+                            computerScore ++;
                         }
                     else  if (result.slice(0,5) == "You w") {
                         footer.textContent = result;
                         paperBttn.style.border = "20px solid green"
                         computerDivImage.style.border = "20px solid red"
-                        computerScore ++;
+                        userScore ++;
                         }
                     else {
                         footer.textContent = result; 
                     }
+                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
             });
                 });
         
@@ -152,22 +171,25 @@ function gameImproved() {           //main game function
                             footer.textContent = result;
                             computerDivImage.style.border = "20px solid green"
                             scissorsBttn.style.border = "20px solid red"
-                            userScore ++;
+                            computerScore ++;
                         }
                     else  if (result.slice(0,5) == "You w") {
                         footer.textContent = result;
                         scissorsBttn.style.border = "20px solid green"
                         computerDivImage.style.border = "20px solid red"
-                        computerScore ++;
+                        userScore ++;
                         }
                     else {
                         footer.textContent = result; 
                     }
+                    playerScoreLabel.textContent = "Your score is: \r\n" + userScore;
+                    computerScoreLabel.textContent = "Computer score is: \r\n" + computerScore;
             });
                 });
         
         })) {}
 };
+
 
 // old code - may be re-factored
 let computerScore = 0
