@@ -34,22 +34,6 @@ const goButton = document.getElementById('start-game');     //Start of the game,
 goButton.addEventListener('click', function(){ gameImproved() });
 
 
-// function fade(element) {
-//     var op = 1;  // initial opacity
-//     var timer = setInterval(function () {
-//         if (op <= 0.1){
-//             clearInterval(timer);
-//             element.style.display = 'none';
-//         }
-//         element.style.opacity = op;
-//         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-//         op -= op * 0.1;
-//     }, 50);
-// }
-
-
-
-
 function gameImproved() {           //main game function
     document.getElementById('selections').style.display="flex";
     document.getElementById('temp-text').style.display="none";
@@ -57,7 +41,8 @@ function gameImproved() {           //main game function
     const rockBttn = document.getElementById('rock');
     const paperBttn = document.getElementById('paper');
     const scissorsBttn = document.getElementById('scissors');
-    const response = document.getElementById('response-label');
+    const responseP = document.getElementById('response-label-player');
+    const responseC = document.getElementById('response-label-computer');
     const selections = document.getElementById('selections');
 
 
@@ -66,15 +51,15 @@ function gameImproved() {           //main game function
             scissorsBttn.classList.add("fade-out");
             paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
             scissorsBttn.addEventListener('animationend', () => scissorsBttn.style.display="none");
-            // fade(paperBttn); 
-            // fade(scissorsBttn);
-            // let userSelection = "rock"
-            // const responseP = document.createElement('div');
-            // responseP.textContent = "You chose rock";
-            // response.appendChild(responseP);
-            // const compResponse = document.createElement('button');
-            // compResponse.textContent = computerChoice();
-            // selections.appendChild(compResponse);
+            let userSelection = "rock"
+            let computerSelection = computerChoice();
+            const computerDiv = document.createElement('div');
+            let computerDivImage = document.createElement('button');
+            computerDivImage.innerHTML = '<image src="./img/scissors.png"/>';
+            responseP.textContent = "You chose\r\nrock";
+            responseC.textContent = "Computer chose\r\n" + computerSelection;
+            selections.appendChild(computerDiv);
+            computerDiv.appendChild(computerDivImage);
 
         }));
         else if (paperBttn.addEventListener('click', () => {
