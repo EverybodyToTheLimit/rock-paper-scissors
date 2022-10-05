@@ -20,16 +20,83 @@ function playRound (computerSelection, playerSelection) {  //function to run a s
     }
 }
 
-function validateInput (userInput) {  //function to validate correct input
-    if ((userInput.toLowerCase() !== "rock") && (userInput.toLowerCase() !== "paper") && (userInput.toLowerCase() !== "scissors"))
-    {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+// function validateInput (userInput) {  // Don't need anymore as user inputs are fixed by button clicks
+//     if ((userInput.toLowerCase() !== "rock") && (userInput.toLowerCase() !== "paper") && (userInput.toLowerCase() !== "scissors"))
+//     {
+//         return false;
+//     }
+//     else {
+//         return true;
+//     }
+// }
 
+const goButton = document.getElementById('start-game');     //Start of the game, introduce the rules and initiate with buttonclick
+goButton.addEventListener('click', function(){ gameImproved() });
+
+
+// function fade(element) {
+//     var op = 1;  // initial opacity
+//     var timer = setInterval(function () {
+//         if (op <= 0.1){
+//             clearInterval(timer);
+//             element.style.display = 'none';
+//         }
+//         element.style.opacity = op;
+//         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+//         op -= op * 0.1;
+//     }, 50);
+// }
+
+
+
+
+function gameImproved() {           //main game function
+    document.getElementById('selections').style.display="flex";
+    document.getElementById('temp-text').style.display="none";
+
+    const rockBttn = document.getElementById('rock');
+    const paperBttn = document.getElementById('paper');
+    const scissorsBttn = document.getElementById('scissors');
+    const response = document.getElementById('response-label');
+    const selections = document.getElementById('selections');
+
+
+        if (rockBttn.addEventListener('click', () => {
+            paperBttn.classList.add("fade-out");
+            scissorsBttn.classList.add("fade-out");
+            paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
+            scissorsBttn.addEventListener('animationend', () => scissorsBttn.style.display="none");
+            // fade(paperBttn); 
+            // fade(scissorsBttn);
+            // let userSelection = "rock"
+            // const responseP = document.createElement('div');
+            // responseP.textContent = "You chose rock";
+            // response.appendChild(responseP);
+            // const compResponse = document.createElement('button');
+            // compResponse.textContent = computerChoice();
+            // selections.appendChild(compResponse);
+
+        }));
+        else if (paperBttn.addEventListener('click', () => {
+            fade(rockBttn); 
+            fade(scissorsBttn);
+            let userSelection = "paper"
+            const responseP = document.createElement('div');
+            responseP.textContent = "You have chosen paper";
+            response.appendChild(responseP);
+        }));
+        else if (scissorsBttn.addEventListener('click', () => {
+            fade(paperBttn); 
+            fade(rockBttn);
+            let userSelection = "scissors"
+            const responseP = document.createElement('div');
+            responseP.textContent = "You have chosen scissors";
+            response.appendChild(responseP);
+        }));
+
+};
+
+// old code - may be re-factored
 let computerScore = 0
 let userScore = 0
 

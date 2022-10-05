@@ -11,15 +11,22 @@
 
     <div class="container">
         <div class="header">
-            <h1>Rock, Paper and Scissors</h1>
+            <h1>Rock, Paper, Scissors</h1>
         </div>
-        <div class="selections">
-            <button id="rock"><image src="./img/rock.png" height="100%" width="100%"></button>
-            <button id="paper"><image src="./img/paper.png" height="50%" width="50%"></button>
-            <button id="scissors"><image src="./img/scissors.png" height="50%" width="50%"></button>
+        <div id="temp-text">
+            <p id="welcome-text">Welcome to Rock, Paper, Scissors! Each game consists of 5 rounds. You will be able to see your score at the bottom. Click Go to start the game!</p>
+            <button id="start-game">Go</button>
         </div>
-        <div class="response-label"></div>
-    </div>
+        <div id="selections">
+            <button id="rock"><image src="./img/rock.png"></button>
+            <button id="paper"><image src="./img/paper.png"></button>
+            <button id="scissors"><image src="./img/scissors.png"></button>
+        </div>
+        <div id="response-label"></div>
+        </div>
+        </div>
+        <div class="footer"></div>
+        </div>
     <script src="./scripts/game-script.js"></script>
 </body>
 </html>
