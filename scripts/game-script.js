@@ -71,6 +71,9 @@ function gameImproved() {           //main game function
         paperBttn.style.display="flex"
         scissorsBttn.style.display="flex"
         rockBttn.style.display="flex"
+        paperBttn.disabled = false;
+        rockBttn.disabled = false;
+        scissorsBttn.disabled = false;
         userSelection = "";
         const computerDiv = document.getElementById('resultImage');
         // computerDiv.removeChild(computerDivImage);
@@ -78,11 +81,15 @@ function gameImproved() {           //main game function
         document.getElementById('next-round').style.display="none";
         rockBttn.style.border = "";
         footer.textContent = "";
+        nextRound.style.display = "none"
 
 
     }
 
     function rockIsClicked() {
+        rockBttn.disabled = true;
+        paperBttn.disabled = true;
+        scissorsBttn.disabled = true;
         paperBttn.classList.add("fade-out");
         scissorsBttn.classList.add("fade-out");
         paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
@@ -90,6 +97,9 @@ function gameImproved() {           //main game function
     }
 
     function paperIsClicked() {
+        rockBttn.disabled = true;
+        paperBttn.disabled = true;
+        scissorsBttn.disabled = true;
         rockBttn.classList.add("fade-out");
         scissorsBttn.classList.add("fade-out");
         rockBttn.addEventListener('animationend', () => rockBttn.style.display="none");
@@ -97,6 +107,9 @@ function gameImproved() {           //main game function
     }
 
     function scissorsIsClicked() {
+        rockBttn.disabled = true;
+        paperBttn.disabled = true;
+        scissorsBttn.disabled = true;
         paperBttn.classList.add("fade-out");
         rockBttn.classList.add("fade-out");
         paperBttn.addEventListener('animationend', () => paperBttn.style.display="none");
@@ -113,23 +126,27 @@ function gameImproved() {           //main game function
         let computerSelection = computerChoice();
         let computerDivImage = document.createElement('button');
         computerDivImage.innerHTML = `<image src="./img/${computerSelection}.png"/>`;
+        computerDivImage.disabled = true;
         computerDivImage.classList.add("fade-in");
         computerDivImage.addEventListener('animationend', () => {responseC.textContent = "Computer chose\r\n" + computerSelection;
         setTimeout(function() {        
         let nextRound = document.getElementById('next-round');
         nextRound.style.display="flex";
         footer.textContent = result;},2000)
-        if (itirations == 1) {nextRound.textContent = "THE LAST ROUND"}
-        else if(itirations > 1) {
+        if (itirations == 4) {nextRound.textContent = "THE LAST ROUND"}
+        else if(itirations > 4) {
             nextRoundClick();
-            document.getElementById('selections').style.display = "none"
+            document.getElementById('selections').style.display = "none";
+            footer.textContent = "";
+            nextRound.style.display = "none"
             const tempText = document.getElementById('temp-text');
             tempText.style.display="flex";
             const welcomeText = document.getElementById('welcome-text').style.display="flex";
             welcomeText.textContent = "Hope you enjoyed the game\r\nTo play again, click the button below"
             goButton.style.display = "none";
             let endButton = document.createElement('button');
-            endButton.textContent = "Try Again"
+            endButton.setAttribute("id", "try-again");
+            endButton.textContent = "Try Again";
             endButton.addEventListener('click', () => {
                 location.reload()});
                 // computerScore = 0;
@@ -158,13 +175,13 @@ function gameImproved() {           //main game function
             const goText = document.getElementById('welcome-text');
             goText.textContent = "";
             if (computerScore > userScore) {
-                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>YOU ARE A LOOOOOOOOOOOSER!!! :)";
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br><br>You: " + userScore + "<br>Computer: " + computerScore + "<br><br>YOU ARE A LOOOOOOOOOOOSER!!! :)";
             }
             else if (computerScore < userScore) {
-                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>YOU ARE THE WINNER!!! :)";
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br><br>You: " + userScore + "<br>Computer: " + computerScore + "<br><br>YOU ARE THE WINNER!!! :)";
             }
             else if (computerScore = userScore) {
-                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br>You: " + userScore + "<br>Computer: " + computerScore + "<br>Neck in neck! Try again!";
+                goText.innerHTML = "Hope you enjoyed playing the game<br>The final score is: <br><br>You: " + userScore + "<br>Computer: " + computerScore + "<br><br>Neck in neck! Try again!";
             }
         }
 

@@ -160,6 +160,21 @@ button {
 #start-game {
     font-size: 30px;
     font-weight: 60;
+    height: 250px;
+    width: 250px;
+    background-image:url("../img/go.png");
+    object-fit: scale-down;
+    background-size: contain;
+}
+
+#try-again {
+  font-size: 30px;
+  font-weight: 60;
+  height: 250px;
+  width: 250px;
+  background-image:url("../img/try_again.png");
+  object-fit: scale-down;
+  background-size: contain;
 }
 
 #selections {
@@ -225,9 +240,16 @@ img {
     width: 20%;
 }
 
-#welcome-test {
+#welcome-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    font-size: 32px;
+    text-emphasis: bold;
     text-align:center;
-    text-shadow: 5px;
+    text-shadow: 10px;
     white-space: pre;
     width: 20%;
 }
